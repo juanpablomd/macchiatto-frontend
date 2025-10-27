@@ -1,97 +1,45 @@
 # ☕ Macchiatto ☕ - CLIENTE WEB (FRONTEND)
 
-Bienvenido al repositorio del cliente web (Frontend) para Macchiatto, una plataforma de comercio electrónico enfocada en la experiencia del usuario y la seguridad.
+Bienvenido al repositorio del cliente web (Frontend) para Macchiatto, una plataforma de comercio electrónico construida para ofrecer una experiencia de usuario fluida, segura y responsiva. El cliente está desarrollado con **JavaScript vanilla** para garantizar la ligereza y un alto rendimiento.
 
-El cliente está construido con tecnologías web vanilla para máxima ligereza y rendimiento.
+## 🌟 Funcionalidades Clave de Usuario
 
-## 🌟 Características Principales
+Hemos priorizado un conjunto completo de funcionalidades de usuario y gestión de cuenta:
 
-* **Autenticación Segura (JWT):** Implementación completa de login/registro utilizando **JSON Web Tokens (JWT)**.
-* **Seguridad de Sesión:** Los datos del carrito de compras se almacenan en **`sessionStorage`** en lugar de `localStorage` para mitigar riesgos de **XSS persistente**.
-* **Gestión del Carrito:** Lógica de carrito de compras implementada en el lado del cliente, con revalidación de precios y puntos en el Backend al momento del checkout.
-* **Puntos de Lealtad:** Muestra puntos del usuario en tiempo real, los cuales se actualizan con el nuevo JWT tras cada compra exitosa.
-* **Navegación Dinámica:** Filtrado de productos por categoría y funcionalidad de búsqueda instantánea.
+### 👤 Gestión de Cuenta y Autenticación
+* **Registro Flexible:** Los usuarios pueden registrarse de forma tradicional (email/contraseña) o a través de **Google OAuth** (Inicio de sesión de terceros).
+* **Gestión de Perfil:** El usuario puede **ver y actualizar sus datos personales** (nombre, email, dirección, etc.).
+* **Foto de Perfil:** Permite a los usuarios **actualizar su foto de perfil** a través de un *upload* seguro.
+* **Historial de Compras:** Acceso directo para **visualizar el historial completo de pedidos**, incluyendo detalles de las transacciones pasadas.
+
+### 🛒 Carrito de Compras y Checkout
+* **Experiencia de Carrito Completa:** El usuario puede añadir, incrementar, decrementar y eliminar productos de su carrito.
+* **Feedback Instantáneo:** Un **"toast" de notificación** aparece brevemente para confirmar que el producto ha sido añadido al carrito.
+* **Proceso de Pedido:** El usuario puede finalizar la compra y generar un pedido, el cual se registra en el Backend.
+* **Sistema de Puntos de Lealtad:** Muestra los **puntos acumulados** del usuario. Tras la compra, el token JWT se actualiza automáticamente con los nuevos puntos, reflejándose de inmediato en la UI.
+
+### 🔍 Navegación y Usabilidad
+* **Buscador Rápido:** Implementación de una funcionalidad de **búsqueda en tiempo real** para encontrar productos por nombre o descripción.
+* **Filtrado por Categorías:** Navegación sencilla gracias al **filtrado dinámico de productos** basado en categorías cargadas desde la API.
+* **Diseño Responsivo:** El diseño está optimizado para funcionar y lucir **perfectamente en cualquier dispositivo** (móvil, tablet y escritorio).
+
+## 🔒 Seguridad Implementada (Un Enfoque Crítico)
+
+* **Autenticación JWT Centralizada:** Todos los datos del usuario (nombre, puntos, ID) se obtienen exclusivamente del **JSON Web Token (JWT)** almacenado en `sessionStorage`, eliminando la necesidad de múltiples peticiones al Backend para obtener datos básicos.
+* **Uso Estratégico de sessionStorage:** El carrito de compras se guarda en **`sessionStorage`** (almacenamiento volátil por sesión) en lugar de `localStorage`. Esto mitiga el riesgo de **XSS persistente**, ya que el carrito se elimina automáticamente al cerrar la pestaña o la sesión.
+* **Separación de Roles:** La navegación a las páginas privadas (Perfil, Carrito, Home) está protegida, requiriendo un token válido.
 
 ## 🛠️ Tecnologías Utilizadas
 
 | Categoría | Tecnología | Nota |
 | :--- | :--- | :--- |
-| **Núcleo** | HTML5, CSS3, JavaScript (ES6+) | Vanilla JS para rendimiento optimizado. |
-| **Estilos** | Tailwind CSS | Framework de CSS para un desarrollo rápido y diseño responsivo. |
-| **APIs** | Fetch API | Conexión asíncrona con el Backend (macchiatto-backend). |
-| **Seguridad** | sessionStorage | Almacenamiento volátil para la sesión del carrito y del usuario. |
+| **Núcleo** | HTML5, CSS3, JavaScript (ES6+) | Desarrollo puro ("Vanilla JS") para máximo rendimiento. |
+| **Estilos** | Tailwind CSS | Framework utilitario para un diseño rápido, limpio y *mobile-first*. |
+| **APIs** | Fetch API | Manejo de todas las comunicaciones asíncronas con el Backend. |
+| **Módulos** | ES Modules (`import/export`) | Organización modular del código JavaScript. |
 
 ## 🚀 Instalación y Ejecución
 
-Dado que este proyecto utiliza **JavaScript vanilla** y se conecta a una API externa, no requiere pasos de compilación complejos.
-
 1.  **Clonar el Repositorio:**
     ```bash
-    git clone [https://github.com/juanpablomd/macchiatto-frontend.git](https://github.com/juanpablomd/macchiatto-frontend.git)
-    cd macchiatto-frontend
-    ```
-2.  **Ejecutar:**
-    Abre el archivo `pages/private/home.html` (o `index.html`) directamente en tu navegador o usa una extensión como *Live Server* de VS Code.
-3.  **Conexión:**
-    Asegúrate de que el **Backend (`macchiatto-backend`) esté corriendo** y la URL de la API en tus archivos `*.api.js` apunten a la dirección correcta (ej: `http://localhost:3000`).
-
----
-
-## 📄 README.md para el Backend (macchiatto-backend)
-
-Este `README` se enfoca en la arquitectura del servidor, la persistencia de datos, las rutas y la gestión segura de secretos.
-
-```markdown
-# ⚙️ Macchiatto ⚙️ - API DEL SERVIDOR (BACKEND)
-
-API RESTful construida en Node.js para gestionar la lógica de negocio, autenticación, datos de productos y transacciones de la plataforma Macchiatto.
-
-Esta API está diseñada bajo el principio de **separación de intereses** para facilitar el mantenimiento y el escalado.
-
-## 🔒 Seguridad y Estructura
-
-* **Manejo de Secretos:** Todas las claves sensibles (claves JWT, credenciales de Google OAuth, URL de MongoDB) se gestionan a través de variables de entorno en el archivo **`.env`**, el cual está **excluido de Git** para máxima seguridad.
-* **Arquitectura:** Diseño basado en *Módulos*, con separación clara de:
-    * **Rutas** (`routes/`)
-    * **Controladores/Lógica de Negocio** (Implícita en las rutas y acciones de la DB)
-    * **Acciones de Base de Datos** (`db/actions/`)
-    * **Esquemas de Modelado** (`db/schemas/`)
-* **Autenticación:** Uso de **JWT** para proteger rutas privadas y **Google OAuth** para inicio de sesión de terceros.
-
-## 🛠️ Tecnologías Clave
-
-| Categoría | Tecnología | Rol |
-| :--- | :--- | :--- |
-| **Servidor** | Node.js / Express | Framework principal para el servidor web. |
-| **Base de Datos** | MongoDB (a través de Mongoose) | Base de datos NoSQL para persistencia de datos. |
-| **Autenticación** | JWT, google-auth-library | Seguridad de sesión y verificación de tokens. |
-| **Variables de Entorno**| `dotenv` | Gestión segura de claves de entorno. |
-
-## 🚀 Instalación y Ejecución
-
-Para correr la API localmente, sigue estos pasos:
-
-1.  **Clonar el Repositorio:**
-    ```bash
-    git clone https://github.com/juanpablomd/macchiatto-backend.git
-    cd macchiatto-backend
-    ```
-2.  **Instalar Dependencias:**
-    ```bash
-    npm install
-    ```
-3.  **Configurar Variables de Entorno:**
-    Crea un archivo llamado **`.env`** en la raíz del proyecto y añade tus claves.
-    ```
-    # .env
-    MONGODB_URI = mongodb://localhost:27017/MacchiattoDB
-    JWT_SECRET="TU_SECRETO_PARA_TOKENS_JWT"
-    GOOGLE_CLIENT_ID='TU_CLIENT_ID_DE_GOOGLE'
-    GOOGLE_CLIENT_SECRET='TU_CLIENT_SECRET_DE_GOOGLE'
-    ```
-4.  **Iniciar el Servidor:**
-    ```bash
-    npm start # O el comando que uses para iniciar tu API
-    ```
-
-La API estará disponible en la URL configurada (ej: `http://localhost:3000`).
+    git clone
