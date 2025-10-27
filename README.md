@@ -12,6 +12,11 @@ Hemos priorizado un conjunto completo de funcionalidades de usuario y gestión d
 * **Foto de Perfil:** Permite a los usuarios **actualizar su foto de perfil** a través de un *upload* seguro.
 * **Historial de Compras:** Acceso directo para **visualizar el historial completo de pedidos**, incluyendo detalles de las transacciones pasadas.
 
+
+<img width="959" height="415" alt="image" src="https://github.com/user-attachments/assets/da430e4c-b4b0-40ee-83a3-e4cc1fb1163a" />
+
+  
+
 ### 🛒 Carrito de Compras y Checkout
 * **Experiencia de Carrito Completa:** El usuario puede añadir, incrementar, decrementar y eliminar productos de su carrito.
 * **Feedback Instantáneo:** Un **"toast" de notificación** aparece brevemente para confirmar que el producto ha sido añadido al carrito.
@@ -42,4 +47,12 @@ Hemos priorizado un conjunto completo de funcionalidades de usuario y gestión d
 
 1.  **Clonar el Repositorio:**
     ```bash
-    git clone
+    git clone [https://github.com/juanpablomd/macchiatto-frontend.git](https://github.com/juanpablomd/macchiatto-frontend.git)
+    cd macchiatto-frontend
+    ```
+2.  **Ejecutar:**
+    Abre el archivo `pages/private/home.html` (o el punto de entrada) directamente en tu navegador o utiliza un servidor local simple (como *Live Server* de VS Code).
+3.  **Conexión:**
+    Asegúrate de que el Backend (`macchiatto-backend`) esté corriendo. El Frontend está configurado para consumir los endpoints de tu API.
+
+---
