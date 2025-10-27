@@ -1,0 +1,14 @@
+# Ignorar carpetas de dependencias (necesarias para Node.js)
+/node_modules
+
+# Ignorar archivos de configuración de entorno (si usas variables de entorno)
+.env
+.env.local
+
+# Ignorar caché de IDEs comunes
+.vscode/
+.idea/
+
+# Ignorar archivos de compilación/distribución si los tienes
+/dist
+/build

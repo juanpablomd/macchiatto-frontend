@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Macchiato</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif']
+          },
+          animation: {
+            'float': 'float 3s ease-in-out infinite',
+            'pulse-slow': 'pulse 3s infinite'
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%': { transform: 'translateY(-5px) rotate(5deg)' }
+            }
+          },
+          backdropBlur: {
+            xs: '2px',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="min-h-screen bg-orange-950 font-poppins bg-[url('/api/placeholder/1920/1080')] bg-cover bg-center bg-fixed bg-blend-overlay">
+  <!-- Header fijo -->
+  <div class="fixed top-0 left-0 right-0 z-50">
+    <header class="mx-4 sm:mx-8 my-3 px-5 sm:px-8 py-4 rounded-2xl flex flex-col md:flex-row items-center gap-4 justify-between shadow-xl bg-orange-900/85 backdrop-blur-md">
+      <!-- Logo y Nombre -->
+      <div class="flex items-center space-x-3">
+        <div class="relative">
+          <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZm1yeDBoOWJtMTF2dXhuMHZtdjNmZ2QzczZtYzd0amx6bWRvazlpNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QZJCwtlAClFHm8xS4z/giphy.gif" alt="Logo de café" class="w-12 h-12 rounded-full shadow-lg animate-float">
+        </div>
+        <a href="/pages/private/home.html" class="text-white text-2xl font-bold hover:text-yellow-300 transition-colors">Macchiato Coffee</a>
+      </div>
+
+     
+      <!-- Buscador y Dropdown -->
+      <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto max-w-xl">
+        <!-- Buscador -->
+        <form action="#" method="get" class="flex items-center w-full">
+          <div class="relative flex items-center w-full">
+            <input type="text" id="search-input" placeholder="Find your perfect brew..." class="px-5 py-3 pr-12 rounded-xl text-gray-800 w-full focus:outline-none shadow-md border-2 border-transparent focus:border-yellow-500 transition-all">
+            <button type="submit" class="absolute right-1 px-3 py-2 rounded-lg bg-orange-900 text-white hover:bg-orange-800 transition-all">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </form>
+
+        <!-- Dropdown de Categorías -->
+        <select id="category-select" class="bg-orange-900 text-white px-5 py-3 rounded-xl shadow-md hover:bg-orange-800 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all w-full sm:w-auto cursor-pointer border border-orange-700 appearance-none bg-no-repeat bg-right pr-10">
+          <option value="all">All Categories</option>
+          <!-- Las opciones se agregarán dinámicamente -->
+        </select>
+      </div>
+
+      <!-- Iconos -->
+      <div class="flex items-center space-x-5">
+        <!-- Carrito -->
+        <a href="#" id="cart-icon" class="relative text-white text-xl p-3 bg-orange-800 rounded-full hover:bg-orange-700 transition-all transform hover:-translate-y-1">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="absolute -top-2 -right-2 bg-yellow-500 w-5 h-5 rounded-full text-xs flex items-center justify-center font-bold">0</span>
+        </a>
+        
+        <!-- Usuario -->
+        <a href="#" id="user-icon" class="relative text-white text-xl p-3 bg-orange-800 rounded-full hover:bg-orange-700 transition-all transform hover:-translate-y-1">
+          <i class="fas fa-user"></i>
+        </a>
+        
+        <!-- Puntos -->
+        <div class="bg-gradient-to-r from-yellow-600 to-yellow-500 text-white px-4 py-2 rounded-xl flex items-center gap-2 shadow-md">
+          <i class="fas fa-star text-white"></i>
+          <span id="user-points" class="font-medium">0 pts</span>
+        </div>
+        
+        <!-- Cerrar Sesión -->
+        <a href="#" id="logout-icon" class="relative text-white text-xl p-3 bg-orange-800 rounded-full hover:bg-red-600 transition-all transform hover:-translate-y-1" title="Logout">
+          <i class="fas fa-sign-out-alt"></i>
+        </a>
+      </div>
+    </header>
+  </div>
+
+  <!-- Espaciador para compensar el header fijo -->
+  <div class="h-32 md:h-24"></div>
+
+  <!-- Título de sección -->
+  <div class="container mx-auto px-4 py-8">
+    <div class="flex justify-between items-center mb-8">
+      <h2 class="text-3xl font-bold text-white">Our Coffee Selection</h2>
+      <div class="flex gap-2">
+        <button class="bg-orange-800 hover:bg-orange-700 text-white p-2 rounded-lg transition-all">
+          <i class="fas fa-th-large"></i>
+        </button>
+        <button class="bg-orange-800 hover:bg-orange-700 text-white p-2 rounded-lg transition-all">
+          <i class="fas fa-list"></i>
+        </button>
+      </div>
+    </div>
+    
+<!-- Contenedor de tarjetas -->
+<div id="card-container" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-4">
+</div>
+
+
+   <!-- Botón flotante de WhatsApp -->
+<a href="https://wa.me/5493512125597" 
+   target="_blank" 
+   class="fixed bottom-12 right-6 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg transition transform hover:scale-110 z-50">
+  <i class="fab fa-whatsapp text-3xl"></i>
+</a>
+
+
+
+
+
+  <!-- Footer -->
+  <footer class="bg-orange-900/85 backdrop-blur-md mt-16 py-6 px-6">
+    <div class="container mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="text-white">
+          <p class="font-bold text-xl mb-2">Macchiato Coffee</p>
+          <p class="text-orange-200">The best coffee experience in town</p>
+        </div>
+        
+        <div class="flex gap-4">
+          <a href="#" class="text-white hover:text-yellow-300 transition-all">
+            <i class="fab fa-facebook-f text-xl"></i>
+          </a>
+          <a href="#" class="text-white hover:text-yellow-300 transition-all">
+            <i class="fab fa-instagram text-xl"></i>
+          </a>
+          <a href="#" class="text-white hover:text-yellow-300 transition-all">
+            <i class="fab fa-twitter text-xl"></i>
+          </a>
+        </div>
+
+        <div class="text-orange-200 text-sm">
+          &copy; 2025 Macchiato Coffee | All rights reserved
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/pages/private/home.controller.js"></script>
+</body>
+</html>

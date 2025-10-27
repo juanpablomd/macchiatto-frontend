@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your cart - Macchiato Coffee</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif']
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-5px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-orange-950 font-poppins bg-[url('/api/placeholder/1920/1080')] bg-cover bg-center bg-fixed bg-blend-overlay">
+
+    <div class="min-h-screen flex flex-col">
+        <!-- Header con efecto de vidrio -->
+        <header class="bg-orange-900/90 backdrop-blur-md px-6 sm:px-12 py-4 flex justify-between items-center shadow-xl mt-5 mx-4 md:mx-8 rounded-2xl sticky top-4 z-50">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-shopping-cart text-yellow-300 text-2xl animate-float"></i>
+                <h1 id="title" class="text-2xl font-bold text-white"></h1>
+            </div>
+            <a href="/pages/private/home.html" class="bg-gradient-to-r from-yellow-400 to-yellow-300 text-orange-900 px-5 py-2 rounded-xl hover:from-yellow-300 hover:to-yellow-200 transition duration-300 shadow-md flex items-center font-medium">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Back to store
+            </a>
+        </header>
+
+        <main class="container mx-auto p-5 flex-grow">
+            <div class="bg-orange-900/60 backdrop-blur-sm rounded-2xl shadow-xl p-6 md:p-8 mt-4 mb-8">
+                <h2 class="text-3xl font-bold mb-8 text-center text-yellow-300">Products in your Cart</h2>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full rounded-xl overflow-hidden shadow-lg">
+                        <thead>
+                            <tr class="bg-gradient-to-r from-orange-800 to-orange-700 text-white">
+                                <th class="px-4 py-4 text-left font-semibold">Product</th>
+                                <th class="px-4 py-4 text-center font-semibold">Quantity</th>
+                                <th class="px-4 py-4 text-center font-semibold">Price</th>
+                                <th class="px-4 py-4 text-center font-semibold">Points</th>
+                                <th class="px-4 py-4 text-center font-semibold"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart-items" class="divide-y divide-orange-700/50 bg-orange-800/90">
+                            <!-- Los elementos del carrito se cargarán dinámicamente -->
+                            <!-- Elemento de ejemplo para visualización -->
+                            <tr class="hover:bg-orange-700/80 transition-colors">
+                                <td class="px-4 py-4 text-white font-medium flex items-center space-x-3">
+                                    <img src="/api/placeholder/60/60" alt="Coffee" class="w-12 h-12 rounded-lg object-cover shadow-md">
+                                    <span>Espresso</span>
+                                </td>
+                                <td class="px-4 py-4 text-center">
+                                    <div class="flex items-center justify-center space-x-2">
+                                        <button class="bg-orange-700 hover:bg-orange-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <span class="text-white font-medium">2</span>
+                                        <button class="bg-orange-700 hover:bg-orange-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-4 text-center text-white">$4.50</td>
+                                <td class="px-4 py-4 text-center">
+                                    <span class="bg-yellow-500/20 text-yellow-300 px-3 py-1 rounded-full font-medium">45</span>
+                                </td>
+                                <td class="px-4 py-4 text-center">
+                                    <button class="text-red-400 hover:text-red-300 transition-colors">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                
+                    <br>
+                    <button id="checkout-btn" class="bg-gradient-to-r from-yellow-500 to-yellow-400 text-orange-950 px-10 py-3 rounded-xl hover:from-yellow-400 hover:to-yellow-300 transition duration-300 shadow-md transform hover:-translate-y-1 font-semibold flex items-center">
+                        <i class="fas fa-shopping-bag mr-2"></i>
+                        Complete Purchase
+                    </button>
+                </div>
+                
+                <!-- Mostrar mensaje cuando el carrito está vacío -->
+                <div id="empty-cart" class="hidden flex flex-col items-center justify-center py-16 space-y-4">
+                    <div class="text-6xl text-orange-700/70">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <p class="text-xl text-orange-200">Your cart is empty</p>
+                    <a href="/pages/private/home.html" class="mt-4 bg-yellow-400 text-orange-900 px-6 py-2 rounded-xl hover:bg-yellow-300 transition duration-300 shadow-md">
+                        Go Shopping
+                    </a>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <div class="mt-6 text-center text-orange-300 text-sm">
+            &copy; 2025 Macchiato Coffee | All rights reserved
+        </div>
+    </div>
+
+    <script type="module" src="/pages/private/cart/cart.js"></script>
+</body>
+</html>
